@@ -1,5 +1,5 @@
 import React from 'react';
-import { Product } from '@/types';
+import { Product } from '../../types';
 import { Button } from '../ui/Button';
 import { Clock } from 'lucide-react';
 
