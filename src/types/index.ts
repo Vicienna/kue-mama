@@ -7,8 +7,8 @@ export type Product = {
   category: string;
   stock: number;
   is_po: boolean;
-  po_days: number; // H-X
-  created_at: string;
+  po_days: number;
+  created_at?: string;
 };
 
 export type Order = {
