@@ -5,33 +5,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg';
 }
 
-export const Button = ({ 
-  variant = 'primary', 
-  size = 'md', 
-  className = '', 
-  children, 
-  ...props 
-}: ButtonProps) => {
+export const Button = ({ variant = 'primary', size = 'md', className = '', children, ...props }: ButtonProps) => {
   const baseStyles = 'rounded-full font-medium transition-all active:scale-95';
-  
   const variants = {
     primary: 'bg-pink-400 text-white hover:bg-pink-300',
     secondary: 'bg-yellow-100 text-gray-700 hover:bg-yellow-200',
     outline: 'border-2 border-pink-400 text-pink-400 hover:bg-pink-400 hover:text-white',
   };
-
-  const sizes = {
-    sm: 'px-3 py-1 text-sm',
-    md: 'px-6 py-2 text-base',
-    lg: 'px-8 py-3 text-lg',
-  };
-
-  return (
-    <button 
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`} 
-      {...props}
-    >
-      {children}
-    </button>
-  );
+  const sizes = { sm: 'px-3 py-1 text-sm', md: 'px-6 py-2 text-base', lg: 'px-8 py-3 text-lg' };
+  return <button className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`} {...props}>{children}</button>;
 };
