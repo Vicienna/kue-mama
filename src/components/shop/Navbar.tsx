@@ -12,7 +12,9 @@ export const Navbar = () => {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/shop" className="flex items-center gap-2 text-xl font-bold text-gray-800">
           <Cake className="text-pink-400" />
-          <span>Kue <span className="text-pink-400">Mama</span></span>
+          <span className="text-gray-800">
+            Kue <span className="text-pink-400">Mama</span>
+          </span>
         </Link>
 
         <Link 
@@ -23,7 +25,7 @@ export const Navbar = () => {
           {itemCount > 0 && (
             <span className="absolute top-0 right-0 bg-pink-400 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
               {itemCount}
-            </span
+            </span>
           )}
         </Link>
       </div>
