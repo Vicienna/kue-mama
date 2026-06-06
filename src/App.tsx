@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './hooks/useCart';
 import { Navbar } from './components/shop/Navbar';
+import { ProtectedRoute } from './components/admin/ProtectedRoute';
 import LandingPage from './app/page';
 import ShopPage from './app/shop/page';
 import CheckoutPage from './app/shop/checkout/page';
@@ -20,9 +21,20 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/shop/checkout" element={<CheckoutPage />} />
+            
+            {/* Admin Routes - PROTECTED */}
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/products" element={<ProductManagement />} />
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/products" element={
+              <ProtectedRoute>
+                <ProductManagement />
+              </ProtectedRoute>
+            } />
+            
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
