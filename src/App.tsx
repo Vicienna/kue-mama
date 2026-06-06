@@ -1,5 +1,7 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './hooks/useCart';
+import { Navbar } from './components/shop/Navbar';
 import LandingPage from './app/page';
 import ShopPage from './app/shop/page';
 import CheckoutPage from './app/shop/checkout/page';
@@ -11,14 +13,17 @@ function App() {
   return (
     <CartProvider>
       <Router>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/shop/checkout" element={<CheckoutPage />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/products" element={<ProductManagement />} />
-        </Routes>
+        <div className="min-h-screen bg-pink-50">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/shop/checkout" element={<CheckoutPage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/products" element={<ProductManagement />} />
+          </Routes>
+        </div>
       </Router>
     </CartProvider>
   );
