@@ -1,16 +1,14 @@
-'use client';
-
 import React, { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/Button';
 import { Lock } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +17,7 @@ export default function AdminLogin() {
     if (error) {
       alert(error.message);
     } else {
-      router.push('/admin');
+      navigate('/admin');
     }
     setLoading(false);
   };
