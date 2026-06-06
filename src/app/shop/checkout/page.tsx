@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
 import { useCart } from '@/hooks/useCart';
 import { formatWhatsAppMessage } from '@/lib/po-logic';
@@ -17,7 +15,6 @@ export default function CheckoutPage() {
   const [minDate, setMinDate] = useState('');
 
   useEffect(() => {
-    // Hitung tanggal minimum berdasarkan PO terlama di keranjang
     const maxPoDays = Math.max(...cart.map(item => item.po_days || 0), 0);
     const date = new Date();
     date.setDate(date.getDate() + maxPoDays);
@@ -39,10 +36,8 @@ export default function CheckoutPage() {
   if (cart.length === 0) return <div className="p-10 text-center">Keranjang kosong, yuk belanja dulu!</div>;
 
   return (
-    <div className="min-h-screen bg-pink-50 p-6 md:p-12">
+    <div className="min-h-screen bg-pink-50 p-6 md:p-12 pt-24">
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        {/* Order Summary */}
         <div className="bg-white p-6 rounded-3xl shadow-sm border border-pink-100">
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
             <ShoppingBag className="text-pink-400" /> Ringkasan Pesanan
@@ -64,7 +59,6 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        {/* Checkout Form */}
         <div className="bg-white p-6 rounded-3xl shadow-sm border border-pink-100">
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
             <User className="text-pink-400" /> Detail Pengiriman
@@ -120,7 +114,6 @@ export default function CheckoutPage() {
             </Button>
           </div>
         </div>
-
       </div>
     </div>
   );
