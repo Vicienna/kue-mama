@@ -1,13 +1,14 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { ProductCard } from '@/components/shop/ProductCard';
 import { Product } from '@/types';
+import { useCart } from '@/hooks/useCart';
 
 export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const { addToCart } = useCart();
 
   useEffect(() => {
     async function fetchProducts() {
@@ -29,9 +30,12 @@ export default function ShopPage() {
   }, []);
 
   const handleAddToCart = (product: Product) => {
-    alert(`Kue ${product.name} masuk ke keranjang!`);
-    // Nanti logic cart akan gue tambahkan di putaran berikutnya
+    addToCart(product);
   };
+
+  const filteredProducts = selectedCategory === 'All' 
+    ? products 
+    : products.filter(p => p.category === selectedCategory);
 
   if (loading) return (
     <div className="flex h-screen items-center justify-center text-pink-500 font-medium">
@@ -39,18 +43,35 @@ export default function ShopPage() {
     </div>
   );
 
+  const categories = ['All', ...Array.from(new Set(products.map(p => p.category)))];
+
   return (
-    <div className="min-h-screen bg-pink-50 p-6 md:p-12">
+    <div className="min-h-screen bg-pink-50 p-6 md:p-12 pt-24">
       <header className="max-w-6xl mx-auto mb-12 text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
           Katalog <span className="text-pink-400">Kue Mama</span> 🍰
         </h1>
-        <p className="text-gray-600 text-lg">Dibuat dengan cinta, dikirim dengan bahagia.</p>
+        
+        <div className="flex flex-wrap justify-center gap-3 mt-8">
+          {categories.map(cat => (
+            <button 
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                selectedCategory === cat 
+                ? 'bg-pink-400 text-white shadow-md' 
+                : 'bg-white text-gray-600 hover:bg-pink-100 border border-pink-200'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
       </header>
 
       <main className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {products.length > 0 ? (
-          products.map((product) => (
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
             <ProductCard 
               key={product.id} 
               product={product} 
@@ -59,7 +80,7 @@ export default function ShopPage() {
           ))
         ) : (
           <div className="col-span-full text-center py-20 text-gray-500">
-            Belum ada kue yang tersedia. Cek lagi nanti ya!
+            Kue kategori {selectedCategory} lagi habis, coba yang lain ya!
           </div>
         )}
       </main>
