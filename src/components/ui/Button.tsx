@@ -15,9 +15,9 @@ export const Button = ({
   const baseStyles = 'rounded-full font-medium transition-all active:scale-95';
   
   const variants = {
-    primary: 'bg-primary text-gray-800 hover:bg-pink-300',
-    secondary: 'bg-secondary text-gray-700 hover:bg-yellow-200',
-    outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white',
+    primary: 'bg-pink-400 text-white hover:bg-pink-300',
+    secondary: 'bg-yellow-100 text-gray-700 hover:bg-yellow-200',
+    outline: 'border-2 border-pink-400 text-pink-400 hover:bg-pink-400 hover:text-white',
   };
 
   const sizes = {
