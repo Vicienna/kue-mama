@@ -1,9 +1,7 @@
-'use client';
-
 import React from 'react';
 import { Button } from '@/components/ui/Button';
 import { Cake } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 export default function LandingPage() {
   return (
@@ -18,7 +16,7 @@ export default function LandingPage() {
         Kue homemade premium dengan rasa yang bikin kangen rumah. Dibuat fresh setiap hari!
       </p>
       <div className="flex gap-4">
-        <Link href="/shop">
+        <Link to="/shop">
           <Button variant="primary" size="lg" className="px-10">
             Lihat Katalog 🍰
           </Button>
